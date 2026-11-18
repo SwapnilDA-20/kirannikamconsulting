@@ -26,6 +26,7 @@ import { absoluteUrl, createMetadata } from "@/lib/seo";
 import { whatsappLinks } from "@/lib/whatsapp";
 import { siteConfig } from "@/config/site";
 import type { Property } from "@/types/property";
+import { asset } from "@/lib/base-path";
 
 /**
  * Static export requires at least one generated path. While there is no
@@ -222,7 +223,7 @@ export default async function PropertyPage({ params }: Props) {
               )}
               {p.compliance.projectQrCode && (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={p.compliance.projectQrCode} alt={`MahaRERA QR code for ${p.compliance.projectName ?? p.title}`} width={120} height={120} className="mt-4" />
+                <img src={asset(p.compliance.projectQrCode)} alt={`MahaRERA QR code for ${p.compliance.projectName ?? p.title}`} width={120} height={120} className="mt-4" />
               )}
               <p className="mt-3 text-xs text-muted-dark">
                 Details verified with the owner on{" "}

@@ -27,21 +27,21 @@ export function createMetadata({ title, description, path, image, noIndex, absol
   return {
     title: absoluteTitle ? { absolute: title } : title,
     description,
-    alternates: { canonical: path },
+    alternates: { canonical: absoluteUrl(path) },
     openGraph: {
       type: "website",
       locale: "en_IN",
       siteName: siteConfig.name,
-      url: path,
+      url: absoluteUrl(path),
       title: fullTitle,
       description,
-      images: [{ url: ogImage.src, alt: ogImage.alt, width: ogImage.width, height: ogImage.height }],
+      images: [{ url: absoluteUrl(ogImage.src), alt: ogImage.alt, width: ogImage.width, height: ogImage.height }],
     },
     twitter: {
       card: "summary_large_image",
       title: fullTitle,
       description,
-      images: [ogImage.src],
+      images: [absoluteUrl(ogImage.src)],
     },
     robots: noIndex ? { index: false, follow: true } : undefined,
   };

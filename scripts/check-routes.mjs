@@ -10,6 +10,7 @@ import { readFileSync, readdirSync, statSync, existsSync } from "node:fs";
 import { join, relative } from "node:path";
 
 const OUT = join(process.cwd(), "out");
+const BASE = (process.env.NEXT_PUBLIC_BASE_PATH || "").replace(/\/$/, "");
 if (!existsSync(OUT)) {
   console.error("No ./out directory — run `npm run build` first.");
   process.exit(1);
@@ -20,7 +21,11 @@ const files = walk(OUT);
 const pages = files.filter((f) => f.endsWith(".html") && !f.includes("/_next/"));
 
 function resolves(url) {
-  const clean = decodeURI(url.split("#")[0].split("?")[0]);
+  let clean = decodeURI(url.split("#")[0].split("?")[0]);
+  if (BASE) {
+    if (clean !== BASE && !clean.startsWith(BASE + "/")) return false; // missing base path
+    clean = clean.slice(BASE.length) || "/";
+  }
   if (clean === "" || clean === "/") return existsSync(join(OUT, "index.html"));
   const p = join(OUT, clean);
   return existsSync(p) && statSync(p).isFile() ? true : existsSync(`${p}.html`) || existsSync(join(p, "index.html"));

@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 import type { Crumb } from "@/lib/seo";
+import { asset } from "@/lib/base-path";
 
 /** Interior page hero — midnight navy with an optional illustrative backdrop. */
 export function PageHero({
@@ -25,8 +26,8 @@ export function PageHero({
           {/* Responsive illustrative backdrop: 900px variant for small screens */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={image.src}
-            srcSet={`${image.src.replace(/\.webp$/, "-900.webp")} 900w, ${image.src} 1800w`}
+            src={asset(image.src)}
+            srcSet={`${asset(image.src.replace(/\.webp$/, "-900.webp"))} 900w, ${asset(image.src)} 1800w`}
             sizes="100vw"
             alt=""
             fetchPriority="high"

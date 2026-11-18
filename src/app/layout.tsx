@@ -6,7 +6,8 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { FloatingWhatsApp } from "@/components/layout/floating-whatsapp";
 import { JsonLd } from "@/components/shared/json-ld";
 import { siteConfig } from "@/config/site";
-import { organizationJsonLd, websiteJsonLd } from "@/lib/seo";
+import { absoluteUrl, organizationJsonLd, websiteJsonLd } from "@/lib/seo";
+import { asset } from "@/lib/base-path";
 
 const cormorant = localFont({
   src: [
@@ -36,13 +37,13 @@ export const metadata: Metadata = {
   authors: [{ name: siteConfig.consultant.name }],
   creator: siteConfig.name,
   formatDetection: { telephone: true, email: true, address: true },
-  icons: { icon: [{ url: "/icon.svg", type: "image/svg+xml" }] },
-  manifest: "/manifest.webmanifest",
+  icons: { icon: [{ url: asset("/icon.svg"), type: "image/svg+xml" }] },
+  manifest: asset("/manifest.webmanifest"),
   openGraph: {
     type: "website",
     locale: "en_IN",
     siteName: siteConfig.name,
-    images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
+    images: [{ url: absoluteUrl(siteConfig.ogImage), width: 1200, height: 630, alt: siteConfig.name }],
   },
 };
 

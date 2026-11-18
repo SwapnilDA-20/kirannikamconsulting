@@ -6,6 +6,7 @@ import { HeroSearch } from "./hero-search";
 import { localities } from "@/data/localities";
 import { siteConfig } from "@/config/site";
 import { whatsappLinks } from "@/lib/whatsapp";
+import { asset } from "@/lib/base-path";
 
 export function Hero() {
   const options = localities.map(({ slug, name }) => ({ slug, name }));
@@ -13,9 +14,9 @@ export function Hero() {
     <section className="relative isolate flex min-h-[100svh] items-end overflow-hidden bg-navy pt-32 pb-16 text-ivory sm:pb-24">
       {/* Illustrative backdrop — generic high-rise towers (not a listed property) */}
       <picture>
-        <source media="(max-width: 767px)" srcSet="/images/illustrative/towers-dusk-900.webp" />
+        <source media="(max-width: 767px)" srcSet={asset("/images/illustrative/towers-dusk-900.webp")} />
         <img
-          src="/images/illustrative/towers-dusk.webp"
+          src={asset("/images/illustrative/towers-dusk.webp")}
           alt="Illustrative image: contemporary high-rise towers against the sky"
           className="absolute inset-0 -z-20 h-full w-full object-cover"
           fetchPriority="high"

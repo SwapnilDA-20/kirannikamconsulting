@@ -1,6 +1,7 @@
 "use client";
 
 import { useId, useState } from "react";
+import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Info, Mail } from "lucide-react";
@@ -147,9 +148,9 @@ export function EnquiryForm({
           />
           <span>
             I agree that {siteConfig.name} may contact me about this enquiry, as described in the{" "}
-            <a href="/privacy" className="text-gold-dark underline underline-offset-2">
+            <Link href="/privacy" className="text-gold-dark underline underline-offset-2">
               privacy policy
-            </a>
+            </Link>
             . *
           </span>
         </label>
