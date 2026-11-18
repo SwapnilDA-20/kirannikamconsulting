@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Kiran Nikam Consulting — design tokens
+   See BRAND-GUIDELINES.md
+   ============================================================ */
+@theme {
+  --color-navy: #101c2c;
+  --color-navy-deep: #172638;
+  --color-navy-soft: #22344b;
+  --color-gold: #c6a46c;
+  --color-gold-light: #dcc394;
+  --color-gold-dark: #8a6a35; /* AA-contrast gold for text on ivory/white */
+  --color-ivory: #f7f5f0;
+  --color-ivory-deep: #efeae0;
+  --color-charcoal: #252525;
+  --color-muted: #777777;
+  --color-muted-dark: #5e5e5e; /* AA on ivory */
+  --color-line: #e3ddd0;
+
+  --font-serif: var(--font-cormorant), "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-manrope), "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --tracking-luxe: 0.28em;
+
+  --ease-luxe: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-fade-up: fade-up 0.9s var(--ease-luxe) both;
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+  body {
+    @apply bg-ivory text-charcoal font-sans antialiased;
+    font-feature-settings: "ss01", "cv11";
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4 {
+    @apply font-serif text-balance;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  p { @apply text-pretty; }
+  ::selection { background: var(--color-gold); color: var(--color-navy); }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  .on-light :focus-visible { outline-color: var(--color-gold-dark); }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .container-luxe {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12;
+  }
+  .eyebrow {
+    @apply inline-flex items-center gap-3 text-[0.7rem] font-semibold uppercase tracking-[0.28em];
+  }
+  .eyebrow::before {
+    content: "";
+    @apply inline-block h-px w-8 bg-current opacity-70;
+  }
+  .gold-rule {
+    @apply block h-px w-16 bg-gold;
+  }
+  .display-title {
+    @apply font-serif text-[2.6rem] leading-[1.04] sm:text-6xl lg:text-7xl xl:text-[5.25rem];
+  }
+  .section-title {
+    @apply font-serif text-[2.1rem] leading-[1.1] sm:text-5xl;
+  }
+  .prose-luxe p { @apply mb-5 leading-relaxed; }
+  .prose-luxe h2 { @apply mt-12 mb-4 text-3xl text-navy; }
+  .prose-luxe h3 { @apply mt-8 mb-3 text-2xl text-navy; }
+  .prose-luxe ul { @apply mb-5 list-disc space-y-2 pl-6 leading-relaxed; }
+  .prose-luxe a { @apply text-gold-dark underline underline-offset-4 hover:text-navy; }
+}
+
+/* Subtle architectural grid used on navy sections */
+.bg-blueprint {
+  background-image:
+    linear-gradient(to right, rgb(198 164 108 / 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(198 164 108 / 0.07) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+.scrollbar-none { scrollbar-width: none; }
+.scrollbar-none::-webkit-scrollbar { display: none; }
+
+@keyframes expand {
+  from { height: 0; opacity: 0; }
+  to { height: var(--radix-accordion-content-height); opacity: 1; }
+}
+@keyframes collapse {
+  from { height: var(--radix-accordion-content-height); opacity: 1; }
+  to { height: 0; opacity: 0; }
+}
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slide-in { from { transform: translateX(100%); } to { transform: translateX(0); } }
+
+/* Scroll-driven reveal (progressive enhancement, no JS) */
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 55%;
+    }
+  }
+}
