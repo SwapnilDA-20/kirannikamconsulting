@@ -83,7 +83,7 @@ export const siteConfig = {
    * Cloudflare Pages environment, or change the fallback below, once the
    * custom domain is live. Used for canonical URLs, sitemap and Open Graph.
    */
-  url: (process.env.NEXT_PUBLIC_SITE_URL || "https://kirannikamconsulting.pages.dev").replace(/\/$/, ""),
+  url: (process.env.NEXT_PUBLIC_SITE_URL || "https://kirannikamconsulting.com").replace(/\/$/, ""),
 
   description:
     "Kiran Nikam Consulting is a Mumbai-based real estate consultancy helping individuals, families and businesses explore residential and commercial property opportunities across Mumbai's Western Suburbs.",

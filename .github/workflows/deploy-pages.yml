@@ -18,8 +18,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      NEXT_PUBLIC_BASE_PATH: /kirannikamconsulting
-      NEXT_PUBLIC_SITE_URL: https://swapnilda-20.github.io/kirannikamconsulting
+      # Served from the custom domain root. For the github.io sub-path instead, set
+      # NEXT_PUBLIC_BASE_PATH: /kirannikamconsulting and the matching site URL.
+      NEXT_PUBLIC_SITE_URL: https://kirannikamconsulting.com
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
